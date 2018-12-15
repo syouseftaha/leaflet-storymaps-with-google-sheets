@@ -2,7 +2,7 @@ $(window).on('load', function() {
   var documentSettings = {};
 
   // Some constants, such as default settings
-  const CHAPTER_ZOOM = 15;
+  const CHAPTER_ZOOM = 16;
 
   // This watches for the scrollable container
   var scrollPosition = 0;
