@@ -80,16 +80,43 @@ $(window).on('load', function() {
   }
 
   function initMap() {
-    var options = mapData.sheets(constants.optionsSheetName).elements;
-    createDocumentSettings(options);
+// Leaflet Map Init
+function initMap() {
+  var map = L.map('map', {
+    zoomControl: false
+  }).setView([0, 0], 5); // initial map automatically fits bounds of all markers
 
-    /* Change narrative width */
-    narrativeWidth = parseInt(getSetting('_narrativeWidth'));
-    if (narrativeWidth > 0 && narrativeWidth < 100) {
-      var mapWidth = 100 - narrativeWidth;
+  // optional : customize link to view source code; add your own GitHub repository
+  map.attributionControl
+  .setPrefix('View <a href="http://github.com/rblades/rblades.github.io">code on GitHub</a>, created with <a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>');
 
-      $('#narration, #title').css('width', narrativeWidth + 'vw');
-      $('#map').css('width', mapWidth + 'vw');
+  // optional: add legend to toggle any baselayers and/or overlays
+  // global variable with (null, null) allows indiv layers to be added inside functions below
+  var controlLayers = L.control.layers( null, null, {
+    position: "bottomright",
+    collapsed: false, // false = open by default
+    'data-intro': 'test',
+    'data-position': 'left'
+  }).addTo(map);
+
+  // optional: reposition zoom control other than default topleft
+  L.control.zoom({position: "topright"}).addTo(map);
+
+  /* BASELAYERS */
+  // use common baselayers below, delete, or add more with plain JavaScript from http://leaflet-extras.github.io/leaflet-providers/preview/
+  // .addTo(map); -- suffix displays baselayer by default
+  // controlLayers.addBaseLayer (variableName, 'label'); -- adds baselayer and label to legend; omit if only one baselayer with no toggle desired
+  // http://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png
+  var lightAll = new L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+    attribution: '<a href="http://maps.stamen.com/toner/#12/37.7706/-122.3782/</a>'
+  }).addTo(map); //this displays layer by default
+  controlLayers.addBaseLayer(lightAll, 'Pembroke Today');
+
+  // Esri satellite map from http://leaflet-extras.github.io/leaflet-providers/preview/
+  var Esri_WorldImagery = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+  });
+  controlLayers.addBaseLayer(Esri_WorldImagery, 'Pembroke Satellite');
     }
 
     var chapterContainerMargin = 70;
