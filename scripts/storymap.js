@@ -2,7 +2,7 @@ $(window).on('load', function() {
   var documentSettings = {};
 
   // Some constants, such as default settings
-  const CHAPTER_ZOOM = 20;
+  const CHAPTER_ZOOM = 19;
 
   // This watches for the scrollable container
   var scrollPosition = 0;
@@ -74,7 +74,7 @@ $(window).on('load', function() {
   function addBaseMap() {
     var basemap = trySetting('_tileProvider', 'Stamen.TonerLite');
     L.tileLayer.provider(basemap, {
-      maxZoom: 20,
+      maxZoom: 19,
       minZoom: 6
     }).addTo(map);
   }
