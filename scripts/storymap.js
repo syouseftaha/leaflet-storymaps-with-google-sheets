@@ -74,7 +74,7 @@ $(window).on('load', function() {
   function addBaseMap() {
     var basemap = trySetting('_tileProvider', 'Stamen.TonerLite');
     L.tileLayer.provider(basemap, {
-      maxZoom: 18,
+      maxZoom: 20,
       minZoom: 6
     }).addTo(map);
   }
