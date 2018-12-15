@@ -79,8 +79,6 @@ $(window).on('load', function() {
     }).addTo(map);
   }
 
-  function initMap() {
-// Leaflet Map Init
 function initMap() {
   var map = L.map('map', {
     zoomControl: false
