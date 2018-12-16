@@ -74,7 +74,7 @@ $(window).on('load', function() {
   function addBaseMap() {
     var basemap = trySetting('_tileProvider', 'Satellite');
     L.tileLayer.provider(basemap, {
-      maxZoom: 19,
+      maxZoom: 22,
       minZoom: 6
     }).addTo(map);
   }
